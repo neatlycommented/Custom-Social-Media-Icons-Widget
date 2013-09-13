@@ -34,7 +34,7 @@ class zr_custom_social_media extends WP_Widget {
             'classname'=>'social-media-icons', // class that will be added to li element in widgeted area ul
             'description'=> __('Add your custom social media icons using image URLs.') // description displayed in admin
             );
-        $this->WP_Widget('zr_custom_social_media', __('Custom Social Media Icons'), $widget_ops, $control_ops); // Name in  the control panel
+        $this->WP_Widget('zr_custom_social_media', __('Custom Social Media Icons'), $widget_ops); // Name in  the control panel
     }
 	
 	/* Our arguments
@@ -103,9 +103,9 @@ class zr_custom_social_media extends WP_Widget {
         $amount = empty($instance['amount']) ? 2 : $instance['amount'];
         $new_amount = $amount + 1;
         for ($i = 1; $i <= $amount; $i++) {
-        	$names[$i] = $instance['name' . $i];
-        	$urls[$i] = $instance['url' . $i];
-        	$icons[$i] = $instance['icon' . $i];
+        	$names[$i] = empty($instance['name' . $i]) ? "" : $instance['name' . $i];
+        	$urls[$i] = empty($instance['url' . $i]) ? "" : $instance['url' . $i];
+        	$icons[$i] = empty($instance['icon' . $i]) ? "" : $instance['icon' . $i];
         }
 		?>
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
@@ -125,11 +125,11 @@ class zr_custom_social_media extends WP_Widget {
 	    <?php //Additional form fields ?>
 	    <p style="border-bottom:4px double #eee;padding: 0 0 10px;">
 	    	<label for="<?php echo $this->get_field_id( 'name' . $new_amount ); ?>">Name</label>
-	    	<input id="<?php echo $this->get_field_id( 'name' . $new_amount ); ?>" name="<?php echo $this->get_field_name( 'name' . $new_amount ); ?>" value="<?php echo $instance['name' . $new_amount ]; ?>" placeholder="e.g. Twitter, Facebook" style="width:100%;" />
+	    	<input id="<?php echo $this->get_field_id( 'name' . $new_amount ); ?>" name="<?php echo $this->get_field_name( 'name' . $new_amount ); ?>" value="" placeholder="e.g. Twitter, Facebook" style="width:100%;" />
 	    	<label for="<?php echo $this->get_field_id( 'url' . $new_amount ); ?>">URL:</label>
-	    	<input id="<?php echo $this->get_field_id( 'url' . $new_amount ); ?>" name="<?php echo $this->get_field_name( 'url' . $new_amount ); ?>" value="<?php echo $instance['url' . $new_amount]; ?>"  placeholder="http://" style="width:100%;" />
+	    	<input id="<?php echo $this->get_field_id( 'url' . $new_amount ); ?>" name="<?php echo $this->get_field_name( 'url' . $new_amount ); ?>" value=""  placeholder="http://" style="width:100%;" />
 	    	<label for="<?php echo $this->get_field_id( 'icon' . $new_amount ); ?>">Icon URL:</label>
-	    	<input id="<?php echo $this->get_field_id( 'icon' . $new_amount ); ?>" name="<?php echo $this->get_field_name( 'icon' . $new_amount ); ?>" value="<?php echo $instance['icon' . $new_amount]; ?>" placeholder="http://" style="width:100%;" />
+	    	<input id="<?php echo $this->get_field_id( 'icon' . $new_amount ); ?>" name="<?php echo $this->get_field_name( 'icon' . $new_amount ); ?>" value="" placeholder="http://" style="width:100%;" />
 	    </p>
 	    
 	 	<input type="hidden" id="<?php echo $this->get_field_id('amount'); ?>" name="<?php echo $this->get_field_name('amount'); ?>" value="<?php echo $amount ?>" />
